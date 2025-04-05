@@ -14,7 +14,7 @@ client = TelegramClient(cfg.session_filepath, cfg.api_id, cfg.api_hash,  system_
 async def handle_message_with_urls(event):
     volume_10 = int(re.search(r'(?<=Last 10 mins vol: )\d+', event.raw_text).group(0))
     logging.info(f'Volume: {volume_10}')
-    if volume_10 >= 9000:
+    if volume_10 >= 9000 and 'mexc' not in event.raw_text.lower():
         await client.forward_messages(entity=int(UN.brush_screener_filtered), messages=event.message)
 
 
